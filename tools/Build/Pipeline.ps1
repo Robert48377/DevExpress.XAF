@@ -7,7 +7,7 @@ param(
 )
 & "$SourcePath\go.ps1" -InstallModules
 $ErrorActionPreference = "Stop"
-$VerbosePreference = "continue"
+# $VerbosePreference = "continue"
 $packageSource = Get-XPackageFeed -Xpand
 
 $localPackages = Get-ChildItem "$sourcePath\src\Modules" "*.csproj" -Recurse|ForEach-Object {
