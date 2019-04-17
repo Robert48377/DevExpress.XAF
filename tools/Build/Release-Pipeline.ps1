@@ -14,4 +14,8 @@ $bArgs=@{
 }
 & $SourcePath\go.ps1 @bArgs
 
-
+"$SourePath\Bin\Nupkg","$SourePath\Bin\Nuspec"|ForEach-Object{
+    Get-ChildItem "$SourePath\Bin\Nupkg" -Recurse |ForEach-Object{
+        Copy-Item $_.FullName -Destination $artifactstagingdirectory
+    }
+}
