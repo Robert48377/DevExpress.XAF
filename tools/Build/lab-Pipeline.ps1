@@ -1,9 +1,10 @@
 param(
     $Branch="lab",
     $SourcePath = "$PSScriptRoot\..\..",
-    $GitHubUserName="apobekiaris",
-    $Pass=$env:GithubPass,
-    $DXApiFeed
+    $GitHubUserName,
+    $Pass,
+    $DXApiFeed,
+    $artifactstagingdirectory
 )
 $ErrorActionPreference = "Stop"
 & "$SourcePath\go.ps1" -InstallModules
@@ -61,3 +62,8 @@ $bArgs=@{
 }
 & $SourcePath\go.ps1 @bArgs
 
+"$SourcePath\Bin\Nupkg","$SourcePath\Bin\Nuspec"|ForEach-Object{
+    Get-ChildItem $_ -Recurse |ForEach-Object{
+        Copy-Item $_.FullName -Destination $artifactstagingdirectory
+    }
+}
